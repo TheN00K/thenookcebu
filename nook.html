@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nook Cebu | Affordable Stays & Travel More</title>
+
+<style>
+:root {
+  --primary: #0f766e;
+  --dark: #1f2937;
+  --light: #f9fafb;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--light);
+  color: var(--dark);
+}
+
+/* HEADER */
+header {
+  background: var(--primary);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header p {
+  margin-top: .5rem;
+  opacity: .9;
+}
+
+/* SEARCH */
+.search {
+  padding: 1rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.search input {
+  width: 100%;
+  padding: .8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ROOMS */
+.rooms {
+  max-width: 1100px;
+  margin: auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.room {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+
+.room img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.room-content {
+  padding: 1rem;
+}
+
+.room h3 {
+  margin: 0;
+}
+
+.price {
+  color: var(--primary);
+  font-weight: bold;
+  margin: .5rem 0;
+}
+
+.amenities {
+  font-size: .9rem;
+  opacity: .85;
+}
+
+.location {
+  margin-top: .5rem;
+  font-size: .85rem;
+}
+
+/* FOOTER */
+footer {
+  background: #111827;
+  color: #9ca3af;
+  text-align: center;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+footer strong {
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>The Nook Cebu</h1>
+  <p>Affordable Rooms • Travel More • Budget Friendly Stays</p>
+</header>
+
+<div class="search">
+  <input type="text" id="search" placeholder="Search by location or amenities...">
+</div>
+
+<section class="rooms" id="roomList"></section>
+
+<footer>
+  <p><strong>The Nook Cebu</strong> © 2025<br>
+  Stay Smart. Travel Free.</p>
+</footer>
+
+<script>
+const rooms = [
+  {name:"City Budget Room", price:1200, location:"Cebu City", amenities:"WiFi, AC, Motor Parking"},
+  {name:"IT Park Studio", price:1500, location:"IT Park", amenities:"WiFi, AC, Workspace"},
+  {name:"Mactan Cozy Stay", price:1400, location:"Mactan", amenities:"WiFi, Near Airport"},
+  {name:"Carbon Market Room", price:900, location:"Carbon", amenities:"Fan, Shared Bath"},
+  {name:"Banilad Comfort", price:1600, location:"Banilad", amenities:"AC, Netflix"},
+  {name:"Lahug Traveler Room", price:1300, location:"Lahug", amenities:"WiFi, Hot Shower"},
+  {name:"Fuente Circle Stay", price:1200, location:"Fuente", amenities:"WiFi, AC"},
+  {name:"Talamban Student Room", price:800, location:"Talamban", amenities:"Fan, Desk"},
+  {name:"Talisay Budget Stay", price:1000, location:"Talisay", amenities:"WiFi, Kitchen"},
+  {name:"Carcar Heritage Room", price:900, location:"Carcar", amenities:"Fan, Balcony"},
+  {name:"Moalboal Backpacker", price:1100, location:"Moalboal", amenities:"WiFi, Scooter Rental"},
+  {name:"Bantayan Island Room", price:1300, location:"Bantayan", amenities:"Near Beach"},
+  {name:"Danao Stopover", price:850, location:"Danao", amenities:"Fan, Parking"},
+  {name:"Liloan Budget Inn", price:900, location:"Liloan", amenities:"WiFi"},
+  {name:"Oslob Whale Stay", price:1200, location:"Oslob", amenities:"Tour Assist"},
+  {name:"Mandaue City Stay", price:1100, location:"Mandaue", amenities:"WiFi, AC"},
+  {name:"Busay Mountain Room", price:1500, location:"Busay", amenities:"View, AC"},
+  {name:"Naga City Room", price:950, location:"Naga", amenities:"WiFi"},
+  {name:"Samboan Quiet Stay", price:1000, location:"Samboan", amenities:"Near Falls"},
+  {name:"Carmen North Stay", price:900, location:"Carmen", amenities:"Parking"}
+];
+
+const roomList = document.getElementById("roomList");
+const search = document.getElementById("search");
+
+function displayRooms(data){
+  roomList.innerHTML = "";
+  data.forEach(room => {
+    roomList.innerHTML += `
+      <div class="room">
+        <img src="https://source.unsplash.com/400x300/?room,hotel" alt="Room">
+        <div class="room-content">
+          <h3>${room.name}</h3>
+          <div class="price">₱${room.price}/night</div>
+          <div class="amenities">${room.amenities}</div>
+          <div class="location">📍 ${room.location}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+search.addEventListener("input", () => {
+  const value = search.value.toLowerCase();
+  const filtered = rooms.filter(r =>
+    r.name.toLowerCase().includes(value) ||
+    r.location.toLowerCase().includes(value) ||
+    r.amenities.toLowerCase().includes(value)
+  );
+  displayRooms(filtered);
+});
+
+displayRooms(rooms);
+</script>
+
+</body>
+</html>
